@@ -23,7 +23,7 @@ public class UsuarioEntity {
     private String contrasena;
 
     @Column (nullable = false)
-    private LocalDateTime fecha_hora_creacion = LocalDateTime.now();
+    private LocalDateTime fecha_hora_creacion;
 
     @ManyToOne (optional = false) // Usamos el optional = false para indicar que esta relaciónn no puede ser nula
     private GeneroEntity genero;

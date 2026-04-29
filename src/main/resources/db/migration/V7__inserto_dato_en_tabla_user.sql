@@ -1,1 +1,0 @@
-INSERT INTO `usuario` (`nick_usuario`, `contrasena`, `fecha_hora_creacion`, `genero_id`, `nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `hora_desayuno`, `puesto_trabajo_id`) VALUES ('jdoe', 'password123', '2023-01-01 00:00:00', 1, 'John', 'Doe', NULL, '1990-01-01', '08:00:00', 1);

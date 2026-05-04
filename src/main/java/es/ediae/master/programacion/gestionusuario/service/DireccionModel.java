@@ -1,5 +1,6 @@
 package es.ediae.master.programacion.gestionusuario.service;
 
+import es.ediae.master.programacion.gestionusuario.controller.DireccionDTO;
 import es.ediae.master.programacion.gestionusuario.entity.DireccionEntity;
 import es.ediae.master.programacion.gestionusuario.entity.UsuarioEntity;
 
@@ -78,6 +79,17 @@ public class DireccionModel {
             direccionEntity.getNumeroCalle(),
             direccionEntity.getUsuario(),
             direccionEntity.isDireccionPrincipal()
+        );
+    }
+
+    public static DireccionModel fromDTO(DireccionDTO direccionDTO) {
+
+        return new DireccionModel (
+            direccionDTO.getId(),
+            direccionDTO.getNombreCalle(),
+            direccionDTO.getNumeroCalle(),
+            direccionDTO.getUsuario(),
+            direccionDTO.isDireccionPrincipal()
         );
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.ediae.master.programacion.gestionusuario.service.DireccionModel;
 import es.ediae.master.programacion.gestionusuario.service.impl.DireccionService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,6 +43,12 @@ public class DireccionController {
     public DireccionDTO actualizarDireccion(@PathVariable Integer idDireccion, @RequestBody DireccionDTO direccionDTO){
 
         return DireccionDTO.fromModel(direccionService.actualizarDireccionExistente(idDireccion, DireccionModel.fromDTO(direccionDTO)));
+    }
+
+    @DeleteMapping("/direccion/{idDireccion}")
+    public void eliminarDireccion(@PathVariable Integer idDireccion) {
+
+        direccionService.eliminarDireccionExistente(idDireccion);
     }
 
     

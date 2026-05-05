@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.ediae.master.programacion.gestionusuario.service.impl.UsuarioService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -24,6 +25,12 @@ public class UsuarioController {
                 .map(UsuarioDTO::fromModel)
                 .toList();
     }
+
+    @GetMapping("/usuario/{idUsuario}")
+    public UsuarioDTO obtenerUsuario(@PathVariable Integer idUsuario) {
+        return UsuarioDTO.fromModel(usuarioService.obtenerUsuarioPorId(idUsuario));
+    }
+    
     
 
 }

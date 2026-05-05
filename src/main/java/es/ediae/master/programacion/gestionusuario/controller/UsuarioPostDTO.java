@@ -1,19 +1,18 @@
-package es.ediae.master.programacion.gestionusuario.service;
+package es.ediae.master.programacion.gestionusuario.controller;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import es.ediae.master.programacion.gestionusuario.controller.UsuarioPostDTO;
 import es.ediae.master.programacion.gestionusuario.entity.GeneroEntity;
 import es.ediae.master.programacion.gestionusuario.entity.PuestoDeTrabajoEntity;
 import es.ediae.master.programacion.gestionusuario.entity.UsuarioEntity;
+import es.ediae.master.programacion.gestionusuario.service.UsuarioModel;
 
-public class UsuarioModel {
+public class UsuarioPostDTO {
 
     // Atributos
 
-    private Integer id;
     private String nickUsuario;
     private String contrasena;
     private LocalDateTime fechaHoraCreacion;
@@ -22,16 +21,15 @@ public class UsuarioModel {
     private String primerApellido;
     private String segundoApellido;
     private Date fechaNacimiento;
-    private Date horaDesayuno;
+    private String horaDesayuno;
     private PuestoDeTrabajoEntity puestoTrabajo;
 
     // Constructor
 
-    public UsuarioModel (Integer id, String nickUsuario, String contrasena, LocalDateTime fechaHoraCreacion,
+    public UsuarioPostDTO (String nickUsuario, String contrasena, LocalDateTime fechaHoraCreacion,
             GeneroEntity genero, String nombre, String primerApellido, String segundoApellido,
-            Date fechaNacimiento, Date horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
+            Date fechaNacimiento, String horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
 
-        this.id = id;
         this.nickUsuario = nickUsuario;
         this.contrasena = contrasena;
         this.fechaHoraCreacion = fechaHoraCreacion;
@@ -45,11 +43,6 @@ public class UsuarioModel {
     }
 
     // Getter y Setters
-
-    public Integer getId () {
-
-        return this.id;
-    }
 
     public String getNickUsuario () {
 
@@ -91,7 +84,7 @@ public class UsuarioModel {
         return this.fechaNacimiento;
     }
 
-    public Date getHoraDesayuno () {
+    public String getHoraDesayuno () {
 
         return this.horaDesayuno;
     }
@@ -99,11 +92,6 @@ public class UsuarioModel {
     public PuestoDeTrabajoEntity getPuestoTrabajo () {
 
         return this.puestoTrabajo;
-    }
-
-    public void setId (Integer id) {
-
-        this.id = id;
     }
 
     public void setNickUsuario (String nickUsuario) {
@@ -146,7 +134,7 @@ public class UsuarioModel {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setHoraDesayuno (Date horaDesayuno) {
+    public void setHoraDesayuno (String horaDesayuno) {
 
         this.horaDesayuno = horaDesayuno;
     }
@@ -156,18 +144,29 @@ public class UsuarioModel {
         this.puestoTrabajo = puestoTrabajo;
     }
 
-    // Método para convertir de Entity a Model
+    // Método que convierte un UsuarioPostDTO a un UsuarioEntity
 
-    public static UsuarioModel fromEntity (UsuarioEntity usuarioEntity) {
+    public static UsuarioEntity toEntity (UsuarioPostDTO usuarioPostDTO) {
 
-        return new UsuarioModel(usuarioEntity.getId(), usuarioEntity.getNickUsuario(),
-                usuarioEntity.getContrasena(), usuarioEntity.getFechaHoraCreacion(),
-                usuarioEntity.getGenero(), usuarioEntity.getNombre(), usuarioEntity.getPrimerApellido(),
-                usuarioEntity.getSegundoApellido(), usuarioEntity.getFechaNacimiento(),
-                usuarioEntity.getHoraDesayuno(), usuarioEntity.getPuestoTrabajo());
+        UsuarioEntity usuario = new UsuarioEntity();
+        Date fechaOriginal = new Date();
+        int hora = Integer.parseInt(usuarioPostDTO.getHoraDesayuno().split(":")[0]);
+        int minuto = Integer.parseInt(usuarioPostDTO.getHoraDesayuno().split(":")[1]);
+        LocalDateTime ldt = fechaOriginal.toInstant()
+                                         .atZone(ZoneId.systemDefault())
+                                         .toLocalDateTime();
+        LocalDateTime nuevaLdt = ldt.withHour(hora).withMinute(minuto).withSecond(0);
+        Date fechaFinal = Date.from(nuevaLdt.atZone(ZoneId.systemDefault()).toInstant());
+        usuario.setNickUsuario(usuarioPostDTO.getNickUsuario());
+        usuario.setContrasena(usuarioPostDTO.getContrasena());
+        usuario.setFechaHoraCreacion(usuarioPostDTO.getFechaHoraCreacion());
+        usuario.setGenero(usuarioPostDTO.getGenero());
+        usuario.setNombre(usuarioPostDTO.getNombre());
+        usuario.setPrimerApellido(usuarioPostDTO.getPrimerApellido());
+        usuario.setSegundoApellido(usuarioPostDTO.getSegundoApellido());
+        usuario.setFechaNacimiento(usuarioPostDTO.getFechaNacimiento());
+        usuario.setHoraDesayuno(fechaFinal);
+        usuario.setPuestoTrabajo(usuarioPostDTO.getPuestoTrabajo());
+        return usuario;
     }
-
-    // Método para convertir de PostDTO a Model
-
-    
 }

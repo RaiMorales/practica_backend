@@ -1,11 +1,15 @@
 package es.ediae.master.programacion.gestionusuario.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.ediae.master.programacion.gestionusuario.controller.UsuarioPostDTO;
 import es.ediae.master.programacion.gestionusuario.entity.UsuarioEntity;
 import es.ediae.master.programacion.gestionusuario.repository.UsuarioRepository;
 import es.ediae.master.programacion.gestionusuario.service.IUsuarioService;
@@ -34,8 +38,10 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public UsuarioModel crearUsuario(UsuarioEntity usuario) {
+    public UsuarioModel crearUsuario(UsuarioPostDTO usuarioPostDTO) {
         
+        UsuarioEntity usuario = UsuarioPostDTO.toEntity(usuarioPostDTO);
+        usuarioRepository.save(usuario);
         return UsuarioModel.fromEntity(usuario);
     }
 

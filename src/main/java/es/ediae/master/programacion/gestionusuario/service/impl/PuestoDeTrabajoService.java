@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.ediae.master.programacion.gestionusuario.repository.PuestoDeTrabajoRepository;
-import es.ediae.master.programacion.gestionusuario.service.IPuestoDeTrabajo;
+import es.ediae.master.programacion.gestionusuario.service.IPuestoDeTrabajoService;
 import es.ediae.master.programacion.gestionusuario.service.PuestoDeTrabajoModel;
 
 @Service
-public class PuestoDeTrabajoService implements IPuestoDeTrabajo{
+public class PuestoDeTrabajoService implements IPuestoDeTrabajoService{
 
     @Autowired
     private PuestoDeTrabajoRepository puestoDeTrabajoRepository;

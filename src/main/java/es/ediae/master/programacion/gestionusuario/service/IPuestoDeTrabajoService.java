@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface IPuestoDeTrabajo {
+public interface IPuestoDeTrabajoService {
 
     public List <PuestoDeTrabajoModel> obtenerPuestosDeTrabajo ();
 

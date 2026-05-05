@@ -10,7 +10,7 @@ import es.ediae.master.programacion.gestionusuario.service.IPuestoDeTrabajo;
 import es.ediae.master.programacion.gestionusuario.service.PuestoDeTrabajoModel;
 
 @Service
-public class PuestoDeTrabajo implements IPuestoDeTrabajo{
+public class PuestoDeTrabajoService implements IPuestoDeTrabajo{
 
     @Autowired
     private PuestoDeTrabajoRepository puestoDeTrabajoRepository;

@@ -12,6 +12,7 @@ import es.ediae.master.programacion.gestionusuario.service.impl.DireccionService
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -37,8 +38,12 @@ public class DireccionController {
         return DireccionDTO.fromModel(direccionService.obtenerDireccionPorId(idDireccion));
     }
 
-    //TODO: IMPLEMENTAR EL MÉTODO DE CREAR UNA DIRECCION PARA UN USUARIO (NO LO HAGO PORQUE NECESITO EL SERVICIO DE USUARIO PARA OBTENER EL USUARIO POR SU ID Y ASI INYECTORLO EN LA DIRECCION)
-    
+    @PostMapping("/direccion")
+    public DireccionDTO crearDireccion(@RequestBody DireccionPostDTO direccionPostDTO) {
+
+        return DireccionDTO.fromModel(direccionService.crearNuevaDireccion(direccionPostDTO));
+    }
+
     @PutMapping("/direccion/{idDireccion}") //PROBAR ESTE MÉTODO CON POSTMAN CUANDO TENGA MAS USUARIOS
     public DireccionDTO actualizarDireccion(@PathVariable Integer idDireccion, @RequestBody DireccionDTO direccionDTO){
 

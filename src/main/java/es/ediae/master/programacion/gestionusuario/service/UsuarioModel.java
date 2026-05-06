@@ -1,6 +1,7 @@
 package es.ediae.master.programacion.gestionusuario.service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -22,14 +23,14 @@ public class UsuarioModel {
     private String primerApellido;
     private String segundoApellido;
     private Date fechaNacimiento;
-    private Date horaDesayuno;
+    private LocalTime horaDesayuno;
     private PuestoDeTrabajoEntity puestoTrabajo;
 
     // Constructor
 
     public UsuarioModel (Integer id, String nickUsuario, String contrasena, LocalDateTime fechaHoraCreacion,
             GeneroEntity genero, String nombre, String primerApellido, String segundoApellido,
-            Date fechaNacimiento, Date horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
+            Date fechaNacimiento, LocalTime horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
 
         this.id = id;
         this.nickUsuario = nickUsuario;
@@ -91,7 +92,7 @@ public class UsuarioModel {
         return this.fechaNacimiento;
     }
 
-    public Date getHoraDesayuno () {
+    public LocalTime getHoraDesayuno () {
 
         return this.horaDesayuno;
     }
@@ -146,7 +147,7 @@ public class UsuarioModel {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setHoraDesayuno (Date horaDesayuno) {
+    public void setHoraDesayuno (LocalTime horaDesayuno) {
 
         this.horaDesayuno = horaDesayuno;
     }
@@ -166,8 +167,4 @@ public class UsuarioModel {
                 usuarioEntity.getSegundoApellido(), usuarioEntity.getFechaNacimiento(),
                 usuarioEntity.getHoraDesayuno(), usuarioEntity.getPuestoTrabajo());
     }
-
-    // Método para convertir de PostDTO a Model
-
-    
 }

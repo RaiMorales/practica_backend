@@ -1,6 +1,7 @@
 package es.ediae.master.programacion.gestionusuario.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -21,14 +22,14 @@ public class UsuarioPostDTO {
     private String primerApellido;
     private String segundoApellido;
     private Date fechaNacimiento;
-    private String horaDesayuno;
+    private LocalTime horaDesayuno;
     private PuestoDeTrabajoEntity puestoTrabajo;
 
     // Constructor
 
     public UsuarioPostDTO (String nickUsuario, String contrasena, LocalDateTime fechaHoraCreacion,
             GeneroEntity genero, String nombre, String primerApellido, String segundoApellido,
-            Date fechaNacimiento, String horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
+            Date fechaNacimiento, LocalTime horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
 
         this.nickUsuario = nickUsuario;
         this.contrasena = contrasena;
@@ -84,7 +85,7 @@ public class UsuarioPostDTO {
         return this.fechaNacimiento;
     }
 
-    public String getHoraDesayuno () {
+    public LocalTime getHoraDesayuno () {
 
         return this.horaDesayuno;
     }
@@ -134,7 +135,7 @@ public class UsuarioPostDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setHoraDesayuno (String horaDesayuno) {
+    public void setHoraDesayuno (LocalTime horaDesayuno) {
 
         this.horaDesayuno = horaDesayuno;
     }
@@ -149,14 +150,6 @@ public class UsuarioPostDTO {
     public static UsuarioEntity toEntity (UsuarioPostDTO usuarioPostDTO) {
 
         UsuarioEntity usuario = new UsuarioEntity();
-        Date fechaOriginal = new Date();
-        int hora = Integer.parseInt(usuarioPostDTO.getHoraDesayuno().split(":")[0]);
-        int minuto = Integer.parseInt(usuarioPostDTO.getHoraDesayuno().split(":")[1]);
-        LocalDateTime ldt = fechaOriginal.toInstant()
-                                         .atZone(ZoneId.systemDefault())
-                                         .toLocalDateTime();
-        LocalDateTime nuevaLdt = ldt.withHour(hora).withMinute(minuto).withSecond(0);
-        Date fechaFinal = Date.from(nuevaLdt.atZone(ZoneId.systemDefault()).toInstant());
         usuario.setNickUsuario(usuarioPostDTO.getNickUsuario());
         usuario.setContrasena(usuarioPostDTO.getContrasena());
         usuario.setFechaHoraCreacion(usuarioPostDTO.getFechaHoraCreacion());
@@ -165,7 +158,7 @@ public class UsuarioPostDTO {
         usuario.setPrimerApellido(usuarioPostDTO.getPrimerApellido());
         usuario.setSegundoApellido(usuarioPostDTO.getSegundoApellido());
         usuario.setFechaNacimiento(usuarioPostDTO.getFechaNacimiento());
-        usuario.setHoraDesayuno(fechaFinal);
+        usuario.setHoraDesayuno(usuarioPostDTO.getHoraDesayuno());
         usuario.setPuestoTrabajo(usuarioPostDTO.getPuestoTrabajo());
         return usuario;
     }

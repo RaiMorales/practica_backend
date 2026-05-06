@@ -1,6 +1,7 @@
 package es.ediae.master.programacion.gestionusuario.entity;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class UsuarioEntity {
     private Date fecha_nacimiento;
 
     @Column (nullable = true)
-    @Temporal (TemporalType.TIME)
-    private Date hora_desayuno;
+    private LocalTime hora_desayuno;
 
     @ManyToOne // No es necesario el @Column porque no es un campo simple, sino una relación con otra entidad. Además tiene un parámetro optional que por defecto es true, lo que significa que puede ser nulo. Si se quisiera que no fuera nulo, habría que poner optional = false.
     private PuestoDeTrabajoEntity puesto_trabajo;
@@ -98,7 +98,7 @@ public class UsuarioEntity {
         return this.fecha_nacimiento;
     }
 
-    public Date getHoraDesayuno () {
+    public LocalTime getHoraDesayuno () {
 
         return this.hora_desayuno;
     }
@@ -153,7 +153,7 @@ public class UsuarioEntity {
         this.fecha_nacimiento = fechaNacimiento;
     }
 
-    public void setHoraDesayuno (Date horaDesayuno) {
+    public void setHoraDesayuno (LocalTime horaDesayuno) {
 
         this.hora_desayuno = horaDesayuno;
     }

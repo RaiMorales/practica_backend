@@ -1,6 +1,7 @@
 package es.ediae.master.programacion.gestionusuario.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 import es.ediae.master.programacion.gestionusuario.entity.GeneroEntity;
@@ -20,14 +21,14 @@ public class UsuarioDTO {
     private String primerApellido;
     private String segundoApellido;
     private Date fechaNacimiento;
-    private Date horaDesayuno;
+    private LocalTime horaDesayuno;
     private PuestoDeTrabajoEntity puestoTrabajo;
 
     // Constructor
 
     public UsuarioDTO (Integer id, String nickUsuario, String contrasena, LocalDateTime fechaHoraCreacion,
             GeneroEntity genero, String nombre, String primerApellido, String segundoApellido,
-            Date fechaNacimiento, Date horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
+            Date fechaNacimiento, LocalTime horaDesayuno, PuestoDeTrabajoEntity puestoTrabajo) {
 
         this.id = id;
         this.nickUsuario = nickUsuario;
@@ -89,7 +90,7 @@ public class UsuarioDTO {
         return this.fechaNacimiento;
     }
 
-    public Date getHoraDesayuno () {
+    public LocalTime getHoraDesayuno () {
 
         return this.horaDesayuno;
     }
@@ -144,7 +145,7 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setHoraDesayuno (Date horaDesayuno) {
+    public void setHoraDesayuno (LocalTime horaDesayuno) {
 
         this.horaDesayuno = horaDesayuno;
     }

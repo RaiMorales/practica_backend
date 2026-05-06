@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.ediae.master.programacion.gestionusuario.controller.DireccionPostDTO;
 import es.ediae.master.programacion.gestionusuario.entity.DireccionEntity;
 import es.ediae.master.programacion.gestionusuario.repository.DireccionRepository;
 import es.ediae.master.programacion.gestionusuario.service.DireccionModel;
@@ -34,8 +35,9 @@ public class DireccionService implements IDireccionService {
     }
 
     @Override
-    public DireccionModel crearNuevaDireccion(DireccionEntity direccion) {
+    public DireccionModel crearNuevaDireccion(DireccionPostDTO direccionPostDTO) {
         
+        DireccionEntity direccion = DireccionPostDTO.toEntity(direccionPostDTO);
         direccionRepository.save(direccion);
         return DireccionModel.fromEntity(direccion);
     }

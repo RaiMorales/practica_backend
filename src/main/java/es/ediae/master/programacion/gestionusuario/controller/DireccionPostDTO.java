@@ -1,5 +1,6 @@
 package es.ediae.master.programacion.gestionusuario.controller;
 
+import es.ediae.master.programacion.gestionusuario.entity.DireccionEntity;
 import es.ediae.master.programacion.gestionusuario.entity.UsuarioEntity;
 
 public class DireccionPostDTO {
@@ -61,5 +62,17 @@ public class DireccionPostDTO {
     public void setDireccionPrincipal (boolean direccionPrincipal) {
 
         this.direccionPrincipal = direccionPrincipal;
+    }
+
+    // Método para convertir un DireccionPostDTO a un DireccionEntity
+
+    public static DireccionEntity toEntity (DireccionPostDTO direccionPostDTO) {
+
+        DireccionEntity direccion = new DireccionEntity();
+        direccion.setNombreCalle(direccionPostDTO.getNombreCalle());
+        direccion.setNumeroCalle(direccionPostDTO.getNumeroCalle());
+        direccion.setUsuario(direccionPostDTO.getUsuario());
+        direccion.setDireccionPrincipal(direccionPostDTO.isDireccionPrincipal());
+        return direccion;
     }
 }

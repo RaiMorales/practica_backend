@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.ediae.master.programacion.gestionusuario.service.UsuarioModel;
 import es.ediae.master.programacion.gestionusuario.service.impl.UsuarioService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +49,12 @@ public class UsuarioController {
     public UsuarioDTO actualizarUsuario(@PathVariable Integer idUsuario, @RequestBody UsuarioPostDTO usuarioPostDTO) {
         
         return UsuarioDTO.fromModel(usuarioService.actualizarUsuarioPorId(idUsuario, UsuarioModel.fromEntity(usuarioPostDTO.toEntity(usuarioPostDTO))));
+    }
+
+    @DeleteMapping("/usuario/{idUsuario}")
+    public void eliminarUsuario(@PathVariable Integer idUsuario) {
+
+        usuarioService.eliminarUsuarioPorId(idUsuario);
     }
     
 

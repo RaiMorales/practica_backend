@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.ediae.master.programacion.gestionusuario.service.UsuarioModel;
 import es.ediae.master.programacion.gestionusuario.service.impl.UsuarioService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -38,6 +41,12 @@ public class UsuarioController {
     public UsuarioDTO crearUsuario(@RequestBody UsuarioPostDTO usuarioPostDTO) {
 
         return UsuarioDTO.fromModel(usuarioService.crearUsuario(usuarioPostDTO));
+    }
+
+    @PutMapping("/usuario/{idUsuario}")
+    public UsuarioDTO actualizarUsuario(@PathVariable Integer idUsuario, @RequestBody UsuarioPostDTO usuarioPostDTO) {
+        
+        return UsuarioDTO.fromModel(usuarioService.actualizarUsuarioPorId(idUsuario, UsuarioModel.fromEntity(usuarioPostDTO.toEntity(usuarioPostDTO))));
     }
     
 
